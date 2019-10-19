@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MaxAndDev/api_datalogger#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "winston": "^3.2.1"
   }
 }
