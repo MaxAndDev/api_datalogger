@@ -1,0 +1,22 @@
+{
+  "name": "datalogger_server",
+  "version": "1.0.0",
+  "description": "A web server for the data logger application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxAndDev/api_datalogger.git"
+  },
+  "author": "Max Nessen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxAndDev/api_datalogger/issues"
+  },
+  "homepage": "https://github.com/MaxAndDev/api_datalogger#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
