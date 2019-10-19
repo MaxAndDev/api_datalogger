@@ -1,7 +1,6 @@
 var winston = require('winston');
-winston.emitErrs = true;
 
-var logger = new winston.Logger({
+const logger = new winston.createLogger({
     transports: [
         new winston.transports.File({
             level: 'info',
