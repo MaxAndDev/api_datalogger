@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const logger = require('./logger/logger');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -9,6 +10,9 @@ const userRoutes = require('./api/routes/user');
 
 logger.debug('Overriding Express logger');
 app.use(morgan('combined', { stream: logger.stream }));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 app.use('/data', dataRoutes);
 app.use('/user', userRoutes);
 
