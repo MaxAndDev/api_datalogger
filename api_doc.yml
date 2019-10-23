@@ -309,6 +309,9 @@ components:
         longitude:
           type: number
           example: 11.5892
+        position_tag:
+          type: string
+          example: 'kitchen'
     ApiResponse:
       type: object
       properties:
