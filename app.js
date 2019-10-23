@@ -2,11 +2,20 @@ const express = require('express');
 const morgan = require('morgan');
 const logger = require('./logger/logger');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 
 const dataRoutes = require('./api/routes/data');
 const userRoutes = require('./api/routes/user');
+
+mongoose.connect('mongodb://localhost:27017/Seminar', { useNewUrlParser: true });
+mongoose.connection.on('connected', () => {
+    console.log("DB Connection Successful to API at " + new Date());
+});
+mongoose.connection.on('error',(err)=>{
+    console.log('database error: '+err);
+})
 
 logger.debug('Overriding Express logger');
 app.use(morgan('combined', { stream: logger.stream }));
