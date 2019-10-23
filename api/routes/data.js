@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const Data = require('../models/data_model');
 
 router.post('/', (req, res, next) => {
-
     // hier muss zuerst entschlüsselung des Bodies erfolgen
     logger.info('Server success');
     const data = new Data({
