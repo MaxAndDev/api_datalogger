@@ -284,6 +284,8 @@ components:
       - humidity
       - temperature
       - timestamp
+      - latitude
+      - longitude
       type: object
       properties:
         station_id:
@@ -301,6 +303,12 @@ components:
         timestamp:
           type: integer
           example: 1570892386
+        latitude:
+          type: number
+          example: 50.9271
+        longitude:
+          type: number
+          example: 11.5892
     ApiResponse:
       type: object
       properties:
