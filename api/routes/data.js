@@ -57,4 +57,24 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.get('/findById/:dataId', (req, res, next) => {
+    const id = req.params.dataId;
+    Data.findById(id)
+    .exec()
+    .then(doc => {
+        logger.info("From DB: " + doc);
+        if (doc) {
+            res.status(200).json(doc);
+        } else {
+            res.status(404).json({
+                message: 'No valid entry for given ID'
+            });
+        }
+    }).catch( err => {
+        logger.error(err);
+        res.status(500).json({
+            message: 'Something went wrong'
+        });
+    });
+});
 module.exports = router;
