@@ -77,4 +77,25 @@ router.get('/findById/:dataId', (req, res, next) => {
         });
     });
 });
+
+router.get('/findByStationId/:stationId', (req, res, next) => {
+    const id = req.params.stationId;
+    Data.find( { station_id : id})
+    .exec()
+    .then( docs => {
+        if (docs) {
+            res.status(200).json(docs);
+        } else {
+            res.status(404).json({
+                message: 'No valid entriy for given stationId'
+            });
+        }
+    }).catch( err => {
+        logger.error(err);
+        res.status(500).json({
+            message: 'Something went wrong'
+        });
+    });
+});
+
 module.exports = router;
