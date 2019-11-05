@@ -25,7 +25,7 @@ router.post('/', (req, res, next) => {
             message: 'Created data',
             data: data
         });
-    }).catch( err => {
+    }).catch( err => {  
         logger.error(err);
         res.status(409).json({
             message: 'Wrong data format'

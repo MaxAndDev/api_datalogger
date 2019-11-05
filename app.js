@@ -9,7 +9,7 @@ const app = express();
 const dataRoutes = require('./api/routes/data');
 const userRoutes = require('./api/routes/user');
 
-mongoose.connect('mongodb://localhost:27017/Seminar', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/Seminar', { useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.on('connected', () => {
     console.log("DB Connection Successful to API at " + new Date());
 });

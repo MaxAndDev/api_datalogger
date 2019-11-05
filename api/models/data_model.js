@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const dataSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    station_id: Number,
-    airpressure: Number,
-    humidity: Number,
-    temperature: Number,
-    timestamp: Number,
-    latitude: Number,
-    longitude: Number,
-    position_tag: String
+    station_id: { type: Number, required: true},
+    airpressure: { type: Number, required: true},
+    humidity: { type: Number, required: true},
+    temperature: { type: Number, required: true},
+    timestamp: { type: Number, required: true},
+    latitude: { type: Number, required: true},
+    longitude: { type: Number, required: true},
+    position_tag: { type: String, required: true},
 });
 
 module.exports = mongoose.model('Data', dataSchema);
