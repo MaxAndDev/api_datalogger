@@ -33,4 +33,28 @@ router.post('/', (req, res, next) => {
     });
 });
 
+router.get('/', (req, res, next) => {
+    Data.find()
+    .select('_id station_id airpressure humidity temperature timestamp')
+    .exec()
+    .then(docs => {
+        const response = {
+            count: docs.length,
+            data: docs
+        };
+        if (docs.length > 0) {
+            res.status(200).json(response)
+        } else {
+            res.status(404).json({
+                message: 'Nothing found'
+            });
+        }
+    }).catch( err => {
+        logger.error(err);
+        res.status(400).json({
+            message: 'Something went wrong!'
+        });
+    });
+});
+
 module.exports = router;
