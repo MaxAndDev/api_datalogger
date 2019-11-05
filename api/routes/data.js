@@ -34,6 +34,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
+    console.log('get req');
     Data.find()
     .select('_id station_id airpressure humidity temperature timestamp')
     .exec()
