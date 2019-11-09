@@ -1,4 +1,6 @@
 const express = require('express');
+const crypto = require('crypto');
+const fs = require('fs');
 const router = express.Router();
 const logger = require('../../logger/logger');
 const mongoose = require('mongoose');
@@ -98,5 +100,43 @@ router.get('/findByStationId/:stationId', (req, res, next) => {
         });
     });
 });
+
+router.get('/hello', (req, res, next) => {
+    createKeys((err, public, private) => {
+       console.log(err);
+       console.log(private);
+       console.log(public);
+    });
+   
+
+});
+
+function createKeys(callback) {
+    const { generateKeyPair } = require('crypto');
+    generateKeyPair('rsa', {
+    modulusLength: 4096,
+    publicKeyEncoding: {
+        type: 'spki',
+        format: 'pem'
+    },
+    privateKeyEncoding: {
+        type: 'pkcs8',
+        format: 'pem',
+        cipher: 'aes-256-cbc',
+        passphrase: 'top secret'
+    }
+    }, (err, publicKey, privateKey) => {
+        if (err) {
+            logger.err(err);
+            return callback(err, {}, {});
+        } else {
+            public = publicKey;
+            private = privateKey;
+    
+            return callback(public, private);
+        }
+    });
+
+}
 
 module.exports = router;
