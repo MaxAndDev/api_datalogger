@@ -132,6 +132,12 @@ function createKeys(callback) {
         } else {
             public = publicKey;
             private = privateKey;
+
+            fs.writeFile("keys.txt", public + "\n" + private, function(err){
+                if (err) {
+                    console.log(err);
+                }
+            });
     
             return callback(public, private);
         }
