@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const router = express.Router();
 const logger = require('../../logger/logger');
 const mongoose = require('mongoose');
@@ -99,31 +98,5 @@ router.get('/findByStationId/:stationId', (req, res, next) => {
         });
     });
 });
-
-router.get('/hello', (req, res, next) => {
-    fs.access('public.txt', fs.F_OK, (err) => {
-        if(err) {
-            logger.err(err);
-            res.status(500).json({
-                message: "Public Key not found"
-            });
-        } else {
-            fs.readFile('public.txt', 'utf8', (err, data) => {
-                if (err) {
-                    logger.err(err);
-                    res.status(500).json({
-                        message: 'Read File Error'
-                    });
-                } else {
-                    res.status(200).json({
-                        public: data // Achtung response enthält Zeilenumruch \n 
-                    })
-                }
-            });
-        }
-    });
-
-});
-
 
 module.exports = router;
