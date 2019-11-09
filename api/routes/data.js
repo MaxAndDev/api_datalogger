@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const router = express.Router();
 const logger = require('../../logger/logger');
 const mongoose = require('mongoose');
@@ -88,7 +89,7 @@ router.get('/findByStationId/:stationId', (req, res, next) => {
             res.status(200).json(docs);
         } else {
             res.status(404).json({
-                message: 'No valid entriy for given stationId'
+                message: 'No valid entry for given stationId'
             });
         }
     }).catch( err => {
@@ -100,56 +101,29 @@ router.get('/findByStationId/:stationId', (req, res, next) => {
 });
 
 router.get('/hello', (req, res, next) => {
-    
-   
+    fs.access('public.txt', fs.F_OK, (err) => {
+        if(err) {
+            logger.err(err);
+            res.status(500).json({
+                message: "Public Key not found"
+            });
+        } else {
+            fs.readFile('public.txt', 'utf8', (err, data) => {
+                if (err) {
+                    logger.err(err);
+                    res.status(500).json({
+                        message: 'Read File Error'
+                    });
+                } else {
+                    res.status(200).json({
+                        public: data // Achtung response enthält Zeilenumruch \n 
+                    })
+                }
+            });
+        }
+    });
 
 });
 
-function createKeys(callback) {
-
-    fs.access("keys.txt", fs.F_OK, (err)=> {
-        if (err) {
-            const { generateKeyPair } = require('crypto');
-            generateKeyPair('rsa', {
-            modulusLength: 4096,
-            publicKeyEncoding: {
-                type: 'spki',
-                format: 'pem'
-            },
-            privateKeyEncoding: {
-                type: 'pkcs8',
-                format: 'pem',
-                cipher: 'aes-256-cbc',
-                passphrase: 'top secret'
-            }
-            }, (err, publicKey, privateKey) => {
-                if (err) {
-                    logger.err(err);
-                    return callback(err, {}, {});
-                } else {
-                    public = publicKey;
-                    private = privateKey;
-        
-                    fs.writeFile("keys.txt", public + "\n" + private, function(err){
-                        if (err) {
-                           logger.err(err);
-                        }
-                    });
-            
-                    return callback(public, private);
-                }
-            });
-        } else {
-
-            return callback("file already exists");
-        
-        };
-
-
-    });
-
-   
-
-}
 
 module.exports = router;

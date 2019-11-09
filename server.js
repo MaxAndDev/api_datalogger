@@ -19,7 +19,7 @@ server.listen(port, function(){
 
 function createKeys(callback) {
 
-    fs.access("keys.txt", fs.F_OK, (err)=> {
+    fs.access("public.txt", fs.F_OK, (err)=> {
         if (err) {
             const { generateKeyPair } = require('crypto');
             generateKeyPair('rsa', {
@@ -42,7 +42,13 @@ function createKeys(callback) {
                     public = publicKey;
                     private = privateKey;
         
-                    fs.writeFile("keys.txt", public + "\n" + private, function(err){
+                    fs.writeFile("private.txt", private, function(err){
+                        if (err) {
+                           logger.err(err);
+                        }
+                    });
+
+                    fs.writeFile("public.txt", public, function(err){
                         if (err) {
                            logger.err(err);
                         }
