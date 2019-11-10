@@ -4,7 +4,7 @@ const router = express.Router();
 const logger = require('../../logger/logger');
 const mongoose = require('mongoose');
 
-const Data = require('../models/data_model');
+const Station = require('../models/station_model');
 
 router.get('/hello', (req, res, next) => {
     fs.access('public.txt', fs.F_OK, (err) => {
@@ -21,27 +21,36 @@ router.get('/hello', (req, res, next) => {
                         message: 'Read File Error'
                     });
                 } else {
-                    Data.find({})
-                        .select('station_id')
-                        .sort({'station_id': -1})
-                        .limit(1)
-                        .exec()
-                        .then( doc => {
-                            console.log(doc);
-                            res.status(200).json({
-                                public: data, // Achtung response enthält Zeilenumruch \n 
-                                station_id: doc[0].station_id + 1
-                            })
-                        });                   
+                    res.status(200).json({
+                        public: data, // Achtung response enthält Zeilenumruch \n 
+                    })                  
                 }
             });
         }
     });
 
-});
+}); 
 
-router.post('/postPublic', (req, res, next) => {
+router.post('/register', (req, res, next) => {
     public_client = req.body.public; // public client nehmen um secret zu verschlüsseln und als response zurück zu senden
+    station_id = req.body.station_id;
+    const station = new Station({
+        _id: new mongoose.Types.ObjectId,
+        station_id: station_id,
+        public: public_client
+    });
+    station.save().then( result => {
+        logger.info(result);
+        res.status(200).json({
+            message: 'Station registered',
+            station: result
+        });
+    }).catch( err => {
+        logger.err(err);
+        res.status(409).json({
+            message: 'Wrong data format'
+        });
+    });
 });
 
 module.exports = router;
