@@ -17,7 +17,7 @@ paths:
    get:
       tags:
       - handshake
-      summary: Does the Handshake for a new stationo
+      summary: Does the Handshake for a new client
       description: Adds a new device to the system
       operationId: add Device
       responses:
@@ -38,7 +38,7 @@ paths:
     post:
       tags:
       - handshake
-      summary: Register a new data object 
+      summary: Register a new client
       operationId: registerStation
       requestBody:
         description: Public Key of Station and new Id
@@ -316,6 +316,11 @@ components:
         pubic: 
          type: string
          description: Public RSA Key Server
+         example: "-----BEGIN PUBLIC KEY-----
+                    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0
+                    FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
+                    3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQAB
+                    -----END PUBLIC KEY-----"
     Register:
       required:
       - public
@@ -325,9 +330,15 @@ components:
         public: 
           description: Public RSA Key Client
           type: string
+          example: "-----BEGIN PUBLIC KEY-----
+                    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0
+                    FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
+                    3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQAB
+                    -----END PUBLIC KEY-----"
         station_id:
           description: MAC Adress of Client
           type: string
+          example: "00-14-22-01-23-45."
     RegisterResponse:
      type: object
      properties:

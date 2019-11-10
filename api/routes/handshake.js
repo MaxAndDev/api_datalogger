@@ -5,6 +5,7 @@ const logger = require('../../logger/logger');
 const mongoose = require('mongoose');
 
 const Station = require('../models/station_model');
+const secretGenerator = require('../utilities/secretGenerator');
 
 router.get('/hello', (req, res, next) => {
     fs.access('public.txt', fs.F_OK, (err) => {
@@ -41,10 +42,18 @@ router.post('/register', (req, res, next) => {
     });
     station.save().then( result => {
         logger.info(result);
-        res.status(200).json({
-            message: 'Station registered',
-            station: result
-        });
+        secretGenerator(station_id, (doc, err) => {
+            if (doc) {
+                res.status(200).json({
+                    message: 'Station registered',
+                    station: result
+                });
+            } else {
+                res.status(500).json({
+                    message: err
+                });
+            }
+        })
     }).catch( err => {
         logger.err(err);
         res.status(409).json({
