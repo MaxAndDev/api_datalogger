@@ -13,6 +13,57 @@ tags:
 - name: user
   description: Operations about user
 paths:
+  /handshake/hello:
+   get:
+      tags:
+      - handshake
+      summary: Does the Handshake for a new stationo
+      description: Adds a new device to the system
+      operationId: add Device
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Hello'
+        500:
+          description: Server error
+          content: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /handshake/register:
+    post:
+      tags:
+      - handshake
+      summary: Register a new data object 
+      operationId: registerStation
+      requestBody:
+        description: Public Key of Station and new Id
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      responses:
+        200:
+          description: Client register success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterResponse'
+        405:
+          description: Invalid input
+          content: {}
+        500: 
+          description: Server error
+          content: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
   /data:
     post:
       tags:
@@ -259,6 +310,30 @@ paths:
           content: {}
 components:
   schemas:
+    Hello:
+      type: object
+      properties:
+        pubic: 
+         type: string
+         description: Public RSA Key Server
+    Register:
+      required:
+      - public
+      - station_id
+      type: object
+      properties:
+        public: 
+          description: Public RSA Key Client
+          type: string
+        station_id:
+          description: MAC Adress of Client
+          type: string
+    RegisterResponse:
+     type: object
+     properties:
+      secret:
+        type: string
+        description: Secret for encryption and decryption
     User:
       type: object
       properties:
