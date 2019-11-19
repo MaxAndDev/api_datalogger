@@ -4,6 +4,7 @@ const logger = require('./logger/logger');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const ip = require('ip');
 
 const app = express();
 
@@ -17,6 +18,8 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error',(err)=>{
     console.log('database error: '+err);
 })
+
+console.log("Server IP: " + ip.address());
 
 logger.debug('Overriding Express logger');
 app.use(morgan('combined', { stream: logger.stream }));
