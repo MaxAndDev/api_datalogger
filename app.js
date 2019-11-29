@@ -30,7 +30,7 @@ app.use(cors());
 
 app.use('/data', dataRoutes);
 app.use('/user', userRoutes);
-app.use('/addStation', addRoutes);
+app.use('/station', addRoutes);
 
 
 app.use((req, res, next) => {

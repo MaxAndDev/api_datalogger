@@ -17,7 +17,7 @@ router.post('/', (req, res, next) => {
         timestamp: req.body.timestamp,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        position_tag: req.body.position_tag
+        position_tag: req.body.position_tag,
     });
     data.save().then( result => {
         logger.info(result);
