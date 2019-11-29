@@ -10,6 +10,7 @@ const app = express();
 
 const dataRoutes = require('./api/routes/data');
 const userRoutes = require('./api/routes/user');
+const addRoutes = require('./api/routes/addStation');
 
 mongoose.connect('mongodb://localhost:27017/Seminar', { useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.on('connected', () => {
@@ -29,6 +30,7 @@ app.use(cors());
 
 app.use('/data', dataRoutes);
 app.use('/user', userRoutes);
+app.use('/addStation', addRoutes);
 
 
 app.use((req, res, next) => {
