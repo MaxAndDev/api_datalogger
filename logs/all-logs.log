@@ -372,3 +372,22 @@
 {"message":"::1 - - [29/Nov/2019:20:43:26 +0000] \"POST /station/add HTTP/1.1\" 200 14 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}
 {"message":{"station_id":"5de18379bf512a391f06171b","secret":"338fe94219a004ba12a624f2d70cd0e3bdba2935f0cab35f05e04769cfb0aa21","api_key":"7ZHYMS2-436M5VZ-HXQJ4XG-MCKY2MH"},"level":"info"}
 {"message":"::1 - - [29/Nov/2019:20:45:45 +0000] \"POST /station/add HTTP/1.1\" 200 88 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}
+{"message":{"station_id":"5de183d0b6e242398170b3d4","secret":"ca4cff06fe4aedd5ada38fa219f46ce76da7984419c5451192b53090785fcc6b","api_key":"RNFJNYM-F81MSPJ-G8B5TFY-GD5MDWC"},"level":"info"}
+{"message":"Message: [object Object]","level":"info"}
+{"message":"::1 - - [29/Nov/2019:20:47:12 +0000] \"POST /station/add HTTP/1.1\" 200 88 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}
+{"message":{"station_id":"5de18461045fef39ea0fc71a","secret":"a2c40b2b59d248e906eedb5d71f782d3b86a84a4770f268b0980d103a684d88b","api_key":"T3QH88Z-8G148HB-PSWVM3N-6K7JDJB"},"level":"info"}
+{"message":"::1 - - [29/Nov/2019:20:49:37 +0000] \"POST /station/add HTTP/1.1\" 200 300 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}
+{"message":{"station_id":"5de184ddc0f5053a849def56","secret":"0fca9409c2dd110ba8547624c47eb034626f9e17eac9c76dc454cbc59e429f4d","api_key":"BVH2BEX-DTB49K7-MKH97AH-WXGB2T8"},"level":"info"}
+{"message":{"created_at":"2019-11-29T20:51:39.059Z","soft_delete":false,"_id":"5de184ddc0f5053a849def56","secret":"0fca9409c2dd110ba8547624c47eb034626f9e17eac9c76dc454cbc59e429f4d","api_key":"5ee225bb-6e96-44cc-a4e2-93aae760b169","latitude":12341234,"longitude":12341234,"description":"asdfasdf","position_tag":"kitchen","__v":0},"level":"info"}
+{"level":"error"}
+{"message":"::1 - - [29/Nov/2019:20:51:41 +0000] \"POST /station/add HTTP/1.1\" 500 32 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}
+{"message":{"station_id":"5de184f98dd19c3ab8a6288d","secret":"4abed35c238c0cc50c66253667154c87ffcf434af1218be330c04dedef84209a","api_key":"C3V5QVY-K8JMW37-QG5GVA0-Z87E3N7"},"level":"info"}
+{"message":{"created_at":"2019-11-29T20:52:06.432Z","soft_delete":false,"_id":"5de184f98dd19c3ab8a6288d","secret":"4abed35c238c0cc50c66253667154c87ffcf434af1218be330c04dedef84209a","api_key":"60f65bef-9a25-4e0c-bc0b-0da8fa0ee1d4","latitude":12341234,"longitude":12341234,"description":"asdfasdf","position_tag":"kitchen","__v":0},"level":"info"}
+{"level":"error"}
+{"message":"::1 - - [29/Nov/2019:20:52:09 +0000] \"POST /station/add HTTP/1.1\" 500 32 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}
+{"message":{"station_id":"5de1851c6a2d373ae934dd3d","secret":"461cdebfcf3b3f6f09d0b39f58d4780817db1946f5509bf272d9a91815d503d6","api_key":"VVRQJ4S-KBE4H4G-N88EJY9-6S23401"},"level":"info"}
+{"message":{"created_at":"2019-11-29T20:52:40.017Z","soft_delete":false,"_id":"5de1851c6a2d373ae934dd3d","secret":"461cdebfcf3b3f6f09d0b39f58d4780817db1946f5509bf272d9a91815d503d6","api_key":"def17913-9adc-4892-aa10-e97936443200","latitude":12341234,"longitude":12341234,"description":"asdfasdf","position_tag":"kitchen","__v":0},"level":"info"}
+{"level":"error"}
+{"message":"::1 - - [29/Nov/2019:20:52:44 +0000] \"POST /station/add HTTP/1.1\" 500 32 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}
+{"message":{"station_id":"5de1854a8b47083b221d3480","secret":"8acfeabeead070ac608ab027811a32fe9dff3bb89e88309d255fbd98a1946203","api_key":"3BQFTG4-DNZMJ32-JMNRNVF-2NS4SSQ"},"level":"info"}
+{"message":"::1 - - [29/Nov/2019:20:53:30 +0000] \"POST /station/add HTTP/1.1\" 200 300 \"-\" \"PostmanRuntime/7.19.0\"\n","level":"info"}

@@ -32,15 +32,17 @@ router.post('/add', (req, res, next) => {
 
         let iv = crypto.randomBytes(16);
         let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(process.env.PRIVATE), iv);
-        let encrypted = cipher.update(message_object.toString());
+        let encrypted = cipher.update(secret.toString('hex'));
 
         encrypted = Buffer.concat([encrypted, cipher.final()]);
-        
+
         res.status(200).json({
+            station_id: result._id,
+            api_key: key.apiKey,
             iv: iv.toString('hex'),
             encrypted: encrypted.toString('hex')
         })
-        
+
     }).catch( err => {
         console.log("Error: " + err);
         logger.info(station);
