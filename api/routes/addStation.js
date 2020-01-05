@@ -8,7 +8,7 @@ const apikey = require('uuid-apikey');
 
 
 router.post('/add', (req, res, next) => {
-    const secret = crypto.randomBytes(32);
+    const secret = crypto.randomBytes(16); // produces 32 bytes
     const key = apikey.create();
 
     const station = new Station({
