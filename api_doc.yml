@@ -13,6 +13,26 @@ tags:
 - name: user
   description: Operations about user
 paths:
+  /station/add:
+    post:
+      tags: 
+      - station
+      summary: Create a new station
+      operationId: addStation
+      requestBody:
+        description: Station object that needs to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Station'
+          required: true
+      responses: 
+        200: 
+          description: success
+          content: 
+        500:
+          description: Internal Server Error
+          content: {}
   /data:
     post:
       tags:
@@ -259,6 +279,19 @@ paths:
           content: {}
 components:
   schemas:
+    Station:
+      type: object
+      properties: 
+        latitude:
+          type: integer
+          format: int64
+        longitude:
+          type: integer
+          format: int64
+        description:
+          type: string
+        position_tag:
+          type: string
     User:
       type: object
       properties:
