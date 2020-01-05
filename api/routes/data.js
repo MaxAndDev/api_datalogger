@@ -17,35 +17,36 @@ router.post('/', (req, res, next) => {
     const algorithm = 'aes-256-cbc';
     logger.info(encr_obj);
 
-    Station.findById(station_id)
+    Station.findById(station_id) // check if station exists
         .exec()
         .then(doc => {
 
-            const api_key = doc.api_key;
+            const api_key = doc.api_key; // get api key from db and secret
             const secret = doc.secret;
             logger.info("API_KEY: " + api_key);
             logger.info("Secret: " + secret);
 
             // decrypt package
             var decipher = crypto.createDecipher(algorithm, secret);
-            var dec = decipher.update(encr_obj, 'base64', 'utf8');
+            var dec = decipher.update(encr_obj, 'base64', 'utf8'); // input enc = base64 and output = "utf8" Caution: Despends on the source where the package is comming from -> remember autoPadding see Stackoverflow
             dec += decipher.final('utf8');
-            logger.info(dec.toString('utf16')); 
             
             // transform API Key
-            const json_data = JSON.parse(dec.toString());
+            const json_data = JSON.parse(dec.toString()); // transform string to json obj
+
+            //alternative do this apikey.toUUID(json_data.api_key) and compare with api_key from above -> less queries
             console.log(json_data);
             Station.find({ api_key: apikey.toUUID(json_data.api_key) }) // retransform api key to uuid because this one was savedind( {api_key: data.api_key})
                 .exec()
                 .then(doc => {
-                    if (doc) {
+                    if (doc) { // if api_key match or if a document with this api exists save the data 
                         const data = new Data({
                             _id: new mongoose.Types.ObjectId,
                             station_id: station_id,
                             airpressure: json_data.airpressure,
                             humidity: json_data.humidity,
                             temperature: json_data.temperature,
-                            //timestamp: req.body.timestamp,
+                            timestamp: json_data.timestamp,
                         });
                         data.save().then(result => {
                             logger.info(result);
