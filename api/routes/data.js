@@ -10,7 +10,6 @@ const Station = require('../models/station_model');
 
 
 router.post('/', (req, res, next) => {
-    
     const station_id = req.body.station_id;
     console.log("StationID: " + station_id);
     const encr_obj = req.body.encrypted;
@@ -28,6 +27,7 @@ router.post('/', (req, res, next) => {
 
             // decrypt package
             var decipher = crypto.createDecipher(algorithm, secret);
+            decipher.setAutoPadding(false);
             var dec = decipher.update(encr_obj, 'base64', 'utf8'); // input enc = base64 and output = "utf8" Caution: Despends on the source where the package is comming from -> remember autoPadding see Stackoverflow
             dec += decipher.final('utf8');
             
