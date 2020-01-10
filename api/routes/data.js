@@ -10,32 +10,42 @@ const Station = require('../models/station_model');
 
 
 router.post('/', (req, res, next) => {
+
     const station_id = req.body.station_id;
-    console.log("StationID: " + station_id);
+    const iv = req.body.iv;
     const encr_obj = req.body.encrypted;
     const algorithm = 'aes-256-cbc';
-    logger.info(encr_obj);
+
+    console.log("StationID: " + station_id);
+    //console.log(req.body);
+
+
+    //logger.info(encr_obj);
 
     Station.findById(station_id) // check if station exists
         .exec()
         .then(doc => {
-
+            console.log('Found smth');
             const api_key = doc.api_key; // get api key from db and secret
             const secret = doc.secret;
             logger.info("API_KEY: " + api_key);
             logger.info("Secret: " + secret);
 
-            // decrypt package
-            var decipher = crypto.createDecipher(algorithm, secret);
-            decipher.setAutoPadding(false);
+            // decrypt encrypted
+            var decipher = crypto.createDecipheriv(algorithm, secret, Buffer.from(iv, 'base64'));
+            //decipher.setAutoPadding(false);
             var dec = decipher.update(encr_obj, 'base64', 'utf8'); // input enc = base64 and output = "utf8" Caution: Despends on the source where the package is comming from -> remember autoPadding see Stackoverflow
             dec += decipher.final('utf8');
+
+            console.log(dec);
             
             // transform API Key
-            const json_data = JSON.parse(dec.toString()); // transform string to json obj
-
+            const json_data = JSON.parse(dec); // transform string to json obj
+            console.log("Timestamp: " + json_data.timestamp);
+            
             //alternative do this apikey.toUUID(json_data.api_key) and compare with api_key from above -> less queries
-            console.log(json_data);
+            //console.log(json_data);
+            
             Station.find({ api_key: apikey.toUUID(json_data.api_key) }) // retransform api key to uuid because this one was savedind( {api_key: data.api_key})
                 .exec()
                 .then(doc => {
@@ -50,6 +60,7 @@ router.post('/', (req, res, next) => {
                         });
                         data.save().then(result => {
                             logger.info(result);
+                            logger.info('Save success');
                             res.status(200).json({
                                 message: 'Created data',
                                 data: data
