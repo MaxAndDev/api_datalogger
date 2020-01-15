@@ -1,6 +1,5 @@
 const logger = require('../../logger/logger');
 const mongoose = require('mongoose');
-const Station = require('../models/station_model');
 const crypto = require('crypto');
 const apikey = require('uuid-apikey');
 

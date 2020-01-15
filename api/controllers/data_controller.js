@@ -30,13 +30,13 @@ exports.data_post = (req, res, next) => {
             dec += decipher.final('utf8');
 
             console.log(dec);
-            
+
             // transform API Key
             const json_data = JSON.parse(dec); // transform string to json obj
-            
+
             //alternative do this apikey.toUUID(json_data.api_key) and compare with api_key from above -> less queries
             //console.log(json_data);
-            
+
             Station.find({ api_key: apikey.toUUID(json_data.api_key) }) // retransform api key to uuid because this one was savedind( {api_key: data.api_key})
                 .exec()
                 .then(doc => {
@@ -63,7 +63,7 @@ exports.data_post = (req, res, next) => {
                             });
                         });
                     }
-                }).catch( err => {
+                }).catch(err => {
                     logger.info(err);
                     res.status(401).json({
                         error: err,
@@ -78,30 +78,32 @@ exports.data_post = (req, res, next) => {
             });
         });
 
-        exports.data_get_all = (req, res, next) => {
-            Data.find()
-                .select('_id station_id airpressure humidity temperature timestamp')
-                .exec()
-                .then(docs => {
-                    const response = {
-                        count: docs.length,
-                        data: docs
-                    };
-                    if (docs.length > 0) {
-                        res.status(200).json(response)
-                    } else {
-                        res.status(404).json({
-                            message: 'Nothing found'
-                        });
-                    }
-                }).catch(err => {
-                    logger.error(err);
-                    res.status(400).json({
-                        message: 'Something went wrong!'
-                    });
-                });
-        }
 }
+
+exports.data_get_all = (req, res, next) => {
+    Data.find()
+        .select('_id station_id airpressure humidity temperature timestamp')
+        .exec()
+        .then(docs => {
+            const response = {
+                count: docs.length,
+                data: docs
+            };
+            if (docs.length > 0) {
+                res.status(200).json(response)
+            } else {
+                res.status(404).json({
+                    message: 'Nothing found'
+                });
+            }
+        }).catch(err => {
+            logger.error(err);
+            res.status(400).json({
+                message: 'Something went wrong!'
+            });
+        });
+}
+
 
 exports.data_get_byId = (req, res, next) => {
     const id = req.params.dataId;

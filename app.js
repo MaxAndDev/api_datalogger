@@ -11,7 +11,6 @@ const app = express();
 
 // Routes
 const dataRoutes = require('./api/routes/data');
-const userRoutes = require('./api/routes/user');
 const addRoutes = require('./api/routes/addStation');
 const numbersRoutes = require('./api/routes/numbers');
 
@@ -36,7 +35,6 @@ app.use(cors());
 
 // URL Mapping
 app.use('/data', dataRoutes);
-app.use('/user', userRoutes);
 app.use('/station', addRoutes);
 app.use('/numbers', numbersRoutes);
 
